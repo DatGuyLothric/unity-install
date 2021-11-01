@@ -86,7 +86,7 @@ runs:
         key: unity-appletv-${{ inputs.cache-version }}
       
     - name: Getting target platforms
-      run: ${{ github.action_path }}/install.sh ${{ inputs.target_platforms }} ${{ inputs.changeset }} ${{ inputs.version }} ${{ github.action_path }}
+      run: ${{ github.action_path }}/install.sh ${{ inputs.target_platforms }} ${{ inputs.changeset }} ${{ inputs.version }} ${{ github.download_folder }}
       shell: bash
       env:
         EDITOR_CACHE: steps.cache-unity-editor.outputs.cache-hit
