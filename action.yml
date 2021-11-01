@@ -1,0 +1,113 @@
+name: "Unity Install"
+description: "Installs Unity and selected platforms build support. Works on macOS runners only."
+
+inputs:
+  target_platforms:
+    description: "Target platforms you want to install supports for. Pass as string with '|' separator. All supported platforms: 'Windows|iOS|Android|Linux|WebGL|AppleTV' (macOS is default)"
+    required: true
+  changeset:
+    description: "Changeset of the version you want to use. You can find it in change notes."
+    required: true
+  version:
+    description: "Version of the Unity editor you want to use."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Check platform
+      run: |
+        if [ "$RUNNER_OS" != "macOS" ]; then
+          echo "$RUNNER_OS not supported"
+          exit 1
+        fi
+      shell: bash
+
+    - name: Check target platforms
+      id: check-target-platforms
+      run: |
+        supported_platforms=('Windows' 'iOS' 'Android' 'Linux' 'WebGL' 'AppleTV')
+        IFS='|' read -ra platforms <<< echo ${{ inputs.target_plarforms }}
+        for i in "${ platforms[@] }"
+        do
+          k=0
+          for j in "${ supported_platforms[@] }"
+          do
+            if [[ $i == $j ]]; then
+              echo "::set-output name=${ i,, }::'true'"
+              k=1
+            fi
+          done
+          if [[ k == 0 ]]; then
+            echo "$i not supported"
+            exit 1
+          fi
+        done
+        for i in "${ supported_platforms[@] }"
+        do
+          if [[ !${ platforms[*] } =~ $i ]]; then
+            echo "::set-output name=${ i,, }::'false'"
+          fi
+        done
+      shell: bash
+
+    - name: Cache Unity editor installer
+      id: cache-unity-editor
+      uses: actions/cache@v2
+      with:
+        path: /Downloads/Unity.pkg
+        key: unity-editor
+
+    - name: Cache Unity Windows installer
+      id: cache-unity-windows
+      uses: actions/cache@v2
+      with:
+        path: /Downloads/Unity-Windows.pkg
+        key: unity-windows
+
+    - name: Cache Unity iOS installer
+      id: cache-unity-ios
+      uses: actions/cache@v2
+      with:
+        path: /Downloads/Unity-iOS.pkg
+        key: unity-ios
+
+    - name: Cache Unity Android installer
+      id: cache-unity-android
+      uses: actions/cache@v2
+      with:
+        path: /Downloads/Unity-Adroid.pkg
+        key: unity-android
+
+    - name: Cache Unity Linux installer
+      id: cache-unity-linux
+      uses: actions/cache@v2
+      with:
+        path: /Downloads/Unity-Linux.pkg
+        key: unity-linux
+
+    - name: Cache Unity WebGL installer
+      id: cache-unity-webgl
+      uses: actions/cache@v2
+      with:
+        path: /Downloads/Unity-WebGL.pkg
+        key: unity-webgl
+
+    - name: Cache Unity AppleTV installer
+      id: cache-unity-appletv
+      uses: actions/cache@v2
+      with:
+        path: /Downloads/Unity-AppleTV.pkg
+        key: unity-appletv
+      
+    - name: Getting target platforms
+      run: ${{ github.action_path }}/install.sh ${{ inputs.target_platforms }} ${{ inputs.changeset }} ${{ inputs.version }}
+      shell: bash
+      env:
+        EDITOR_CACHE: steps.cache-unity-editor.outputs.cache-hit
+        WINDOWS_CACHE: steps.cache-unity-windows.outputs.cache-hit
+        IOS_CACHE: steps.cache-unity-ios.outputs.cache-hit
+        ANDROID_CACHE: steps.cache-unity-android.outputs.cache-hit
+        LINUX_CACHE: steps.cache-unity-linux.outputs.cache-hit
+        WEBGL_CACHE: steps.cache-unity-webgl.outputs.cache-hit
+        APPLETV_CACHE: steps.cache-unity-appletv.outputs.cache-hit
