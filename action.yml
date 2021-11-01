@@ -32,49 +32,49 @@ runs:
       id: cache-unity-editor
       uses: actions/cache@v2
       with:
-        path: /Downloads/Unity.pkg
+        path: ~/Downloads/Unity.pkg
         key: unity-editor
 
     - name: Cache Unity Windows installer
       id: cache-unity-windows
       uses: actions/cache@v2
       with:
-        path: /Downloads/Unity-Windows.pkg
+        path: ~/Downloads/Unity-Windows.pkg
         key: unity-windows
 
     - name: Cache Unity iOS installer
       id: cache-unity-ios
       uses: actions/cache@v2
       with:
-        path: /Downloads/Unity-iOS.pkg
+        path: ~/Downloads/Unity-iOS.pkg
         key: unity-ios
 
     - name: Cache Unity Android installer
       id: cache-unity-android
       uses: actions/cache@v2
       with:
-        path: /Downloads/Unity-Adroid.pkg
+        path: ~/Downloads/Unity-Adroid.pkg
         key: unity-android
 
     - name: Cache Unity Linux installer
       id: cache-unity-linux
       uses: actions/cache@v2
       with:
-        path: /Downloads/Unity-Linux.pkg
+        path: ~/Downloads/Unity-Linux.pkg
         key: unity-linux
 
     - name: Cache Unity WebGL installer
       id: cache-unity-webgl
       uses: actions/cache@v2
       with:
-        path: /Downloads/Unity-WebGL.pkg
+        path: ~/Downloads/Unity-WebGL.pkg
         key: unity-webgl
 
     - name: Cache Unity AppleTV installer
       id: cache-unity-appletv
       uses: actions/cache@v2
       with:
-        path: /Downloads/Unity-AppleTV.pkg
+        path: ~/Downloads/Unity-AppleTV.pkg
         key: unity-appletv
       
     - name: Getting target platforms
