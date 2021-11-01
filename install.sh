@@ -1,22 +1,22 @@
 #!/bin/bash
 
-# Inputs: platforms changeset version
+# Inputs: platforms changeset version download_folder
 
 # Constants
 unity_editor_link="http://download.unity3d.com/download_unity/$2/MacEditorInstaller/Unity.pkg"
-unity_editor_installer='~/Downloads/Unity.pkg'
+unity_editor_installer="$4/Unity.pkg"
 unity_windows_link="https://download.unity3d.com/download_unity/$2/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-$3.pkg"
-unity_windows_installer='~/Downloads/Unity-Windows.pkg'
+unity_windows_installer="$4/Unity-Windows.pkg"
 unity_ios_link="https://download.unity3d.com/download_unity/$2/MacEditorTargetInstaller/UnitySetup-Linux-Support-for-Editor-$3.pkg"
-unity_ios_installer='~/Downloads/Unity-iOS.pkg'
+unity_ios_installer="$4/Unity-iOS.pkg"
 unity_android_link="https://download.unity3d.com/download_unity/$2/MacEditorTargetInstaller/UnitySetup-iOS-Support-for-Editor-$3.pkg"
-unity_android_installer='~/Downloads/Unity-Android.pkg'
+unity_android_installer="$4/Unity-Android.pkg"
 unity_linux_link="https://download.unity3d.com/download_unity/$2/MacEditorTargetInstaller/UnitySetup-Android-Support-for-Editor-$3.pkg"
-unity_linux_installer='~/Downloads/Unity-Linux.pkg'
+unity_linux_installer="$4/Unity-Linux.pkg"
 unity_webgl_link="https://download.unity3d.com/download_unity/$2/MacEditorTargetInstaller/UnitySetup-WebGL-Support-for-Editor-$3.pkg"
-unity_webgl_installer='~/Downloads/Unity-WebGL.pkg'
+unity_webgl_installer="$4/Unity-WebGL.pkg"
 unity_appletv_link="https://download.unity3d.com/download_unity/$2/MacEditorTargetInstaller/UnitySetup-AppleTV-Support-for-Editor-$3.pkg"
-unity_appletv_installer='~/Downloads/Unity-AppleTV.pkg'
+unity_appletv_installer="$4/Unity-AppleTV.pkg"
 
 # Check installs function
 check_installs() {
