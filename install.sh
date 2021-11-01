@@ -3,7 +3,6 @@
 # Inputs: platforms changeset version
 
 # Constants
-supported_platforms=('macOS' 'Windows' 'iOS' 'Android' 'Linux' 'WebGL' 'AppleTV')
 unity_editor_link="http://download.unity3d.com/download_unity/$2/MacEditorInstaller/Unity.pkg"
 unity_editor_installer='/Downloads/Unity.pkg'
 unity_windows_link="https://download.unity3d.com/download_unity/$2/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-$3.pkg"
@@ -18,6 +17,8 @@ unity_webgl_link="https://download.unity3d.com/download_unity/$2/MacEditorTarget
 unity_webgl_installer='/Downloads/Unity-WebGL.pkg'
 unity_appletv_link="https://download.unity3d.com/download_unity/$2/MacEditorTargetInstaller/UnitySetup-AppleTV-Support-for-Editor-$3.pkg"
 unity_appletv_installer='/Downloads/Unity-AppleTV.pkg'
+
+sudo mkdir /Downloads
 
 # Check installs function
 check_installs() {
