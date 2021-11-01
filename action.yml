@@ -11,6 +11,10 @@ inputs:
   version:
     description: "Version of the Unity editor you want to use."
     required: true
+  download_folder:
+    description: "Folder to download all installers to."
+    required: false
+    default: '.'
 
 runs:
   using: "composite"
@@ -32,49 +36,49 @@ runs:
       id: cache-unity-editor
       uses: actions/cache@v2
       with:
-        path: ~/Downloads/Unity.pkg
+        path: ${{ inputs.download_folder }}/Unity.pkg
         key: unity-editor
 
     - name: Cache Unity Windows installer
       id: cache-unity-windows
       uses: actions/cache@v2
       with:
-        path: ~/Downloads/Unity-Windows.pkg
+        path: ${{ inputs.download_folder }}/Unity-Windows.pkg
         key: unity-windows
 
     - name: Cache Unity iOS installer
       id: cache-unity-ios
       uses: actions/cache@v2
       with:
-        path: ~/Downloads/Unity-iOS.pkg
+        path: ${{ inputs.download_folder }}/Unity-iOS.pkg
         key: unity-ios
 
     - name: Cache Unity Android installer
       id: cache-unity-android
       uses: actions/cache@v2
       with:
-        path: ~/Downloads/Unity-Adroid.pkg
+        path: ${{ inputs.download_folder }}/Unity-Adroid.pkg
         key: unity-android
 
     - name: Cache Unity Linux installer
       id: cache-unity-linux
       uses: actions/cache@v2
       with:
-        path: ~/Downloads/Unity-Linux.pkg
+        path: ${{ inputs.download_folder }}/Unity-Linux.pkg
         key: unity-linux
 
     - name: Cache Unity WebGL installer
       id: cache-unity-webgl
       uses: actions/cache@v2
       with:
-        path: ~/Downloads/Unity-WebGL.pkg
+        path: ${{ inputs.download_folder }}/Unity-WebGL.pkg
         key: unity-webgl
 
     - name: Cache Unity AppleTV installer
       id: cache-unity-appletv
       uses: actions/cache@v2
       with:
-        path: ~/Downloads/Unity-AppleTV.pkg
+        path: ${{ inputs.download_folder }}/Unity-AppleTV.pkg
         key: unity-appletv
       
     - name: Getting target platforms
