@@ -15,6 +15,10 @@ inputs:
     description: "Folder to download all installers to."
     required: false
     default: '.'
+  cache-version:
+    description: "Use this to clear installers cache."
+    required: false
+    default: '1'
 
 runs:
   using: "composite"
@@ -37,49 +41,49 @@ runs:
       uses: actions/cache@v2
       with:
         path: ${{ inputs.download_folder }}/Unity.pkg
-        key: unity-editor
+        key: unity-editor-${{ inputs.cache-version }}
 
     - name: Cache Unity Windows installer
       id: cache-unity-windows
       uses: actions/cache@v2
       with:
         path: ${{ inputs.download_folder }}/Unity-Windows.pkg
-        key: unity-windows
+        key: unity-windows-${{ inputs.cache-version }}
 
     - name: Cache Unity iOS installer
       id: cache-unity-ios
       uses: actions/cache@v2
       with:
         path: ${{ inputs.download_folder }}/Unity-iOS.pkg
-        key: unity-ios
+        key: unity-ios-${{ inputs.cache-version }}
 
     - name: Cache Unity Android installer
       id: cache-unity-android
       uses: actions/cache@v2
       with:
         path: ${{ inputs.download_folder }}/Unity-Adroid.pkg
-        key: unity-android
+        key: unity-android-${{ inputs.cache-version }}
 
     - name: Cache Unity Linux installer
       id: cache-unity-linux
       uses: actions/cache@v2
       with:
         path: ${{ inputs.download_folder }}/Unity-Linux.pkg
-        key: unity-linux
+        key: unity-linux-${{ inputs.cache-version }}
 
     - name: Cache Unity WebGL installer
       id: cache-unity-webgl
       uses: actions/cache@v2
       with:
         path: ${{ inputs.download_folder }}/Unity-WebGL.pkg
-        key: unity-webgl
+        key: unity-webgl-${{ inputs.cache-version }}
 
     - name: Cache Unity AppleTV installer
       id: cache-unity-appletv
       uses: actions/cache@v2
       with:
         path: ${{ inputs.download_folder }}/Unity-AppleTV.pkg
-        key: unity-appletv
+        key: unity-appletv-${{ inputs.cache-version }}
       
     - name: Getting target platforms
       run: ${{ github.action_path }}/install.sh ${{ inputs.target_platforms }} ${{ inputs.changeset }} ${{ inputs.version }} ${{ github.action_path }}
