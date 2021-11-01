@@ -4,13 +4,13 @@
 
 supported_platforms=('Windows' 'iOS' 'Android' 'Linux' 'WebGL' 'AppleTV')
 IFS='|' read -ra platforms <<< echo $1
-for i in "${ platforms[@] }"
+for i in "${platforms[@]}"
 do
   k=0
-  for j in "${ supported_platforms[@] }"
+  for j in "${supported_platforms[@]}"
   do
     if [[ $i == $j ]]; then
-      echo "::set-output name=${ i,, }::'true'"
+      echo "::set-output name=${i,,}::'true'"
       k=1
     fi
   done
@@ -19,9 +19,9 @@ do
     exit 1
   fi
 done
-for i in "${ supported_platforms[@] }"
+for i in "${supported_platforms[@]}"
 do
-  if [[ !${ platforms[*] } =~ $i ]]; then
-    echo "::set-output name=${ i,, }::'false'"
+  if [[ !${platforms[*]} =~ $i ]]; then
+    echo "::set-output name=${i,,}::'false'"
   fi
 done
