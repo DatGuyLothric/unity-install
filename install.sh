@@ -29,7 +29,7 @@ check_installs() {
     if [[ -e "$3" || $6 == 'true' ]]; then
       echo "Installer was found"
     else
-      sudo curl -o $3 $2
+      sudo curl --create-dirs -o $3 $2
     fi
     sudo installer -dumplog -package $3 -target /Applications
   fi
